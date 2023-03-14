@@ -1,9 +1,10 @@
 import React, {FormEvent} from 'react';
+import { withTranslation, WithTranslation } from 'react-i18next';
 import sessionRequest, {login, logout} from "sessionRequest";
 import ErrorAlert from "util_components/bootstrap/ErrorAlert";
 import Modal, {ModalBody} from "util_components/bootstrap/Modal";
 
-type Props = {
+interface Props extends WithTranslation {
   onLogin: () => any,
   loginUrl: string,
   passwordResetUrl: string
@@ -25,40 +26,42 @@ const initialState: State = {
   resetEmailSent: false
 };
 
-export default class LoginForm extends React.Component<Props, State> {
+class LoginForm extends React.Component<Props, State> {
   state = initialState;
+
+
 
   render() {
     const {showPasswordReset, resetEmailSent} = this.state;
-
+    const {t} = this.props;
     return (<>
       <form onSubmit={this.submit}>
-        <ErrorAlert status={this.state.error} message="Login failed. Please try again."/>
+        <ErrorAlert status={this.state.error} message={t("Login failed. Please try again.")}/>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">{t("Username")}</label>
           <input type="test" className="form-control" name="username"
                  defaultValue={this.state.username}
                  onBlur={this.focusPassword}
                  autoFocus={true}/>
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("Password")}</label>
           <input type="password" className="form-control" name="password" id="password" defaultValue={this.state.password}/>
 
           <a className="clickable text-primary"
              onClick={() => this.setState({showPasswordReset: true})}>
-            Forgot password?
+            {t("Forgot password?")}
           </a>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">{t("Submit")}</button>
       </form>
 
       {showPasswordReset &&
-        <Modal onClose={() => this.setState({showPasswordReset: false})} title="Reset password">
+        <Modal onClose={() => this.setState({showPasswordReset: false})} title={t("Reset password")}>
           <ModalBody>
             {resetEmailSent ?
               <>
-                <p>Password reset instruction have been sent to your email.</p>
+                <p>{t("Password reset instruction have been sent to your email.")}</p>
                 <button className="btn btn-primary"
                         onClick={() => this.setState({resetEmailSent: false, showPasswordReset: false})}>
                   Close
@@ -66,13 +69,13 @@ export default class LoginForm extends React.Component<Props, State> {
               </>
             :
               <>
-                <p>Enter your email to receive a password reset link:</p>
+                <p>{t("Enter your email to receive a password reset link:")}</p>
                 <form onSubmit={this.resetPassword}>
                   <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t("Email")}</label>
                     <input type="test" className="form-control" name="email" id="reset-email" autoFocus={true}/>
                   </div>
-                  <button type="submit" className="btn btn-primary">Send password reset email</button>
+                  <button type="submit" className="btn btn-primary">{t("Send password reset email")}</button>
                 </form>
               </>
             }
@@ -116,3 +119,5 @@ export default class LoginForm extends React.Component<Props, State> {
     })
   }
 }
+
+export default withTranslation()(LoginForm);

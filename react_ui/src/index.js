@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './MainUI';
 import * as serviceWorker from './serviceWorker';
+import './i18n';
 import styles from './index.scss'; // eslint-disable-line
 
 ReactDOM.render(<App />, document.getElementById('root'));
