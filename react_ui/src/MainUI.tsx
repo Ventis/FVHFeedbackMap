@@ -14,6 +14,7 @@ import Confirm from "util_components/bootstrap/Confirm";
 import MapDataPointsEditor from "components/map_data_points/MapDataPointsEditor";
 import MapDataPointsContextProvider from "components/map_data_points/MapDataPointsContextProvider";
 import TagButtons from "components/TagButtons";
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 type UIState = {
   user?: User,
@@ -22,7 +23,7 @@ type UIState = {
   menuOpen: boolean
 }
 
-class MainUI extends React.Component<{}, UIState> {
+class MainUI extends React.Component<WithTranslation, UIState> {
   state: UIState = {
     user: undefined,
     dataFetched: false,
@@ -60,6 +61,7 @@ class MainUI extends React.Component<{}, UIState> {
   }
 
   render() {
+    const { t } = this.props;
     const {user, dataFetched, showLogout} = this.state;
 
     // @ts-ignore
@@ -74,8 +76,8 @@ class MainUI extends React.Component<{}, UIState> {
       <div style={{height: window.innerHeight}} className="flex-column d-flex" id="MainUI">
         <NavBar onIconClick={this.onNavIconClick}
                 icon={user ? "account_circle" : "login"}
-                iconText={user ? user.username : 'Kirjaudu'}>
-          <h4 className="m-2">FVH Palautekartta</h4>
+                iconText={user ? user.username : t('Kirjaudu')}>
+          <h4 className="m-2">{t('FVH Palautekartta')}</h4>
         </NavBar>
         <div className="flex-grow-1 flex-shrink-1 overflow-auto">
           {props.buttons ? <TagButtons/> :
@@ -124,4 +126,4 @@ class MainUI extends React.Component<{}, UIState> {
   }
 }
 
-export default MainUI;
+export default withTranslation()(MainUI);
