@@ -1,8 +1,9 @@
 import React, {FormEvent} from 'react';
+import { useTranslation, withTranslation, WithTranslation } from 'react-i18next';
 import sessionRequest, {login, logout} from "sessionRequest";
 import ErrorAlert from "util_components/bootstrap/ErrorAlert";
 
-type Props = {
+interface Props extends WithTranslation {
   changePasswordUrl: string,
   token: string,
   uid: string
@@ -22,28 +23,29 @@ const initialState: State = {
   success: false
 };
 
-export default class ResetPasswordForm extends React.Component<Props, State> {
+class ResetPasswordForm extends React.Component<Props, State> {
   state = initialState;
 
   render() {
     const {success} = this.state;
+    const {t} = this.props;
 
     return success ?
-      <p>Password successfully reset. <a href='#/'>Go to login</a></p>
+      <p>{t("Password successfully reset.")} <a href='#/'>{t("Go to login")}</a></p>
     :
       <form onSubmit={this.submit}>
         <ErrorAlert status={Boolean(this.state.error)} message={this.state.error}/>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("Password")}</label>
           <input type="password" className="form-control" name="new_password1" id="new_password1"
                  defaultValue={this.state.new_password1}/>
         </div>
         <div className="form-group">
-          <label htmlFor="password">Repeat password</label>
+          <label htmlFor="password">{t("Repeat password")}</label>
           <input type="password" className="form-control" name="new_password2" id="new_password2"
                  defaultValue={this.state.new_password2}/>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">{t("Submit")}</button>
       </form>;
   }
 
@@ -53,7 +55,8 @@ export default class ResetPasswordForm extends React.Component<Props, State> {
   }
 
   submit = (e: any) => {
-    const {changePasswordUrl, uid, token} = this.props;
+    const {changePasswordUrl, uid, token, } = this.props;
+    const {t} = useTranslation();
     e.preventDefault();
     const formData = new FormData(e.target);
     let data = {};
@@ -65,12 +68,14 @@ export default class ResetPasswordForm extends React.Component<Props, State> {
       if (response.status == 200) this.setState({success: true});
       else if (response.status == 400) response.json().then(resp => {
         if (resp.token) this.setState({error:
-            <>Invalid token. You may need to request a new reset from the <a href='/#/'>login screen</a>.</>
+            <>{t('Invalid token. You may need to request a new reset from the')} <a href='/#/'>{t('login screen')}</a>.</>
         });
         const field_error = resp.new_password1 || resp.new_password2;
         if (field_error) this.setState({error: field_error});
       });
-      else this.setState({error: "Reset failed. Please try again."});
+      else this.setState({error: t("Reset failed. Please try again.")});
     })
   };
 }
+
+export default withTranslation()(ResetPasswordForm);

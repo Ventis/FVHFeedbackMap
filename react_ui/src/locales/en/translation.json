@@ -12,5 +12,26 @@
     "Password reset instruction have been sent to your email.": "Password reset instruction have been sent to your email.",
     "Enter your email to receive a password reset link:": "Enter your email to receive a password reset link:",
     "Email": "Email",
-    "Send password reset email": "Send password reset email"
+    "Send password reset email": "Send password reset email",
+    "tags": {
+        "Benches": "Benches",
+        "Public Toilets": "Public Toilets",
+        "Parks": "Parks",
+        "Drinking Fountains": "Drinking Fountains",
+        "Trees": "Trees",
+        "Luikasta": "Hazardous",
+        "Turvatonta": "Unsafe",
+        "Epäsiistiä": "Untidy",
+        "Heikko valaistus": "Low lighting",
+        "Miellyttävä paikka": "Pleasant area",
+        "Vehreää": "Greenery"
+    },
+    "Password successfully reset.": "Password successfully reset.",
+    "Go to login": "Go to login",
+    "Repeat password": "Repeat password",
+    "Invalid token. You may need to request a new reset from the": "Invalid token. You may need to request a new reset from the",
+    "login screen": "login screen",
+    "Reset failed. Please try again.": "Reset failed. Please try again.",
+    "Register": "Register",
+    "Loading": "Loading"
 }
