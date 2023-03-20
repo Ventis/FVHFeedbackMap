@@ -5,8 +5,10 @@ import {JSONSchema6} from "json-schema";
 import {Button} from 'reactstrap';
 import sessionRequest, {login} from "sessionRequest";
 import ErrorAlert from "util_components/bootstrap/ErrorAlert";
+import { withTranslation, WithTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
-type RegisterFormProps = {
+interface RegisterFormProps extends WithTranslation {
   url: string,
   loginUrl: string,
   onLogin: () => any
@@ -25,10 +27,10 @@ const initialState: RegisterFormState = {
 const schema: () => JSONSchema6 = () => ({
   type: 'object',
   properties: {
-    username: {type: 'string', title: 'Username', default: ''},
-    email: {type: 'string', title: 'Email', default: ''},
-    password1: {type: 'string', title: 'Password', default: ''},
-    password2: {type: 'string', title: 'Repeat password', default: ''},
+    username: {type: 'string', title: `${i18next.t('Username')}`, default: ''},
+    email: {type: 'string', title: `${i18next.t('Email')}`, default: ''},
+    password1: {type: 'string', title: `${i18next.t('Password')}`, default: ''},
+    password2: {type: 'string', title: `${i18next.t('Repeat password')}`, default: ''},
   },
   required: ['username', 'email', 'password1', 'password2']
 });
@@ -38,19 +40,20 @@ const uiSchema = {
   password2: {'ui:widget': 'password'}
 };
 
-export default class RegisterForm extends React.Component<RegisterFormProps, RegisterFormState> {
+class RegisterForm extends React.Component<RegisterFormProps, RegisterFormState> {
   schema = schema();
   state = initialState;
 
   render() {
     const {formData, errors} = this.state;
+    const {t} = this.props;
     return <Form schema={this.schema} uiSchema={uiSchema} onSubmit={this.onSubmit}
                  // @ts-ignore
                  formData={formData} showErrorList={false} extraErrors={this.extraErrors()}>
       {errors && errors.non_field_errors &&
         <ErrorAlert message={errors.non_field_errors} status/>
       }
-      <Button color="primary" type="submit">Register</Button>
+      <Button color="primary" type="submit">{t('Register')}</Button>
     </Form>;
   }
 
@@ -78,3 +81,5 @@ export default class RegisterForm extends React.Component<RegisterFormProps, Reg
     }))
   }
 }
+
+export default withTranslation()(RegisterForm);

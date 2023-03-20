@@ -12,5 +12,26 @@
     "Password reset instruction have been sent to your email.": "Instructies om je wachtwoord te herstellen zijn verstuurd naar je e-mailadres.",
     "Enter your email to receive a password reset link:": "Vul je e-mailadres in om een link te ontvangen om je wachtwoord te herstellen:",
     "Email": "E-mail",
-    "Send password reset email": "Stuur wachtwoord herstelmail" 
+    "Send password reset email": "Stuur wachtwoord herstelmail",
+    "tags": {
+        "Benches": "Banken",
+        "Public Toilets": "Publieke Toiletten",
+        "Parks": "Parken",
+        "Drinking Fountains": "Drinkfonteinen",
+        "Trees": "Bomen",
+        "Luikasta": "Valrisico",
+        "Turvatonta": "Gevaarlijk",
+        "Epäsiistiä": "Slordig",
+        "Heikko valaistus": "Slechte verlichting",
+        "Miellyttävä paikka": "Aangename plek",
+        "Vehreää": "Groene plek"
+    },
+    "Password successfully reset.": "Wachtwoord succesvol hersteld.",
+    "Go to login": "Terug naar login",
+    "Repeat password": "Herhaal wachtwoord",
+    "Invalid token. You may need to request a new reset from the": "Foute token. Mogelijks moet je een nieuwe herstellink aanvragen op het",
+    "login screen": "login scherm",
+    "Reset failed. Please try again.": "Wachtwoord herstellen mislukt. Probeer nogmaals.",
+    "Register": "Register",
+    "Loading": "Laden"
 }
