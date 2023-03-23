@@ -11,7 +11,7 @@ jobs:
       postgres:
         image: postgis/postgis
         env:
-          POSTGRES_DB: feedback_map_dev
+          POSTGRES_DB: feedback_map
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: feedback_map
         ports:
