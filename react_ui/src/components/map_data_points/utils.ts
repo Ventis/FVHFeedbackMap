@@ -1,4 +1,4 @@
-import { MapDataPoint, User } from "components/types";
+import { CreatedBy, MapDataPoint, User } from "components/types";
 import sessionRequest from "sessionRequest";
 import { tagsUrl } from "urls";
 
@@ -8,7 +8,9 @@ export const userCanEditNote = (
 ) => {
   // @ts-ignore
   const is_creator =
-    user && mapDataPoint.created_by && user.id == mapDataPoint.created_by.id;
+    user &&
+    mapDataPoint.created_by &&
+    user.id == (mapDataPoint.created_by as CreatedBy).id;
   const newAnonymousNote =
     (mapDataPoint.created_at &&
       !user &&

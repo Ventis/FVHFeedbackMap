@@ -2,7 +2,7 @@ import React from "react";
 
 export class ModalBody extends React.Component {
   render() {
-    return <div className="modal-body">{this.props.children}</div>;
+    return <div className="modal-body">{(this.props as any).children}</div>;
   }
 }
 

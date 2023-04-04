@@ -2,7 +2,7 @@ import React from "react";
 
 import sessionRequest from "sessionRequest";
 import { mapDataPointUrl } from "urls";
-import { AppContext, MapDataPoint } from "components/types";
+import { AppContext, CreatedBy, MapDataPoint } from "components/types";
 import Modal from "util_components/bootstrap/Modal";
 import ErrorAlert from "util_components/bootstrap/ErrorAlert";
 
@@ -75,9 +75,10 @@ class MapDataPointModal extends React.Component<
     const adjustPosition =
       canEdit && requestLocation ? this.adjustPosition : undefined;
 
-    // @ts-ignore
     const credit = `${
-      note.created_by ? (note.created_by as any).username : ""
+      note.created_by && (note.created_by as CreatedBy).username
+        ? (note.created_by as CreatedBy).username
+        : user.username
     } ${formatTimestamp(note.created_at)}`;
 
     const title = (
