@@ -97,7 +97,7 @@ class MapDataPointFiltersButton extends React.Component<
     const { filters, filtersOpen, recentMappers, mappersOpen, counts, tags } =
       this.state;
     const filterOptions = this.filterOptions();
-    const { t } = this.props;
+    const { t, i18n } = this.props;
 
     const FilterItem = ({ label }: { label: string }) => {
       // @ts-ignore
@@ -155,7 +155,10 @@ class MapDataPointFiltersButton extends React.Component<
             <>
               <DropdownItem divider />
               {tags.map(({ tag }) => (
-                <FilterItem label={tag} key={tag} />
+                <FilterItem
+                  label={i18n.exists(`tags.${tag}`) ? t(`tags.${tag}`) : tag}
+                  key={tag}
+                />
               ))}
             </>
           )}

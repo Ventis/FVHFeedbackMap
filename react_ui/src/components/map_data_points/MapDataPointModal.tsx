@@ -55,7 +55,8 @@ class MapDataPointModal extends React.Component<
   }
 
   render() {
-    const { onClose, fullScreen, showOnMap, requestLocation, t } = this.props;
+    const { onClose, fullScreen, showOnMap, requestLocation, t, i18n } =
+      this.props;
     const { note, repositioning } = this.state;
     const { user } = this.context as any;
 
@@ -93,7 +94,9 @@ class MapDataPointModal extends React.Component<
           }}
           refreshNote={this.fetchNote}
         />
-        {note.comment || (note.tags || [""])[0]}
+        {note.comment || i18n.exists(`tags.${(note.tags || [""])[0]}`)
+          ? t(`tags.${(note.tags || [""])[0]}`)
+          : (note.tags || [""])[0]}
         {note.created_by ? t(" by ") : " "}
         {credit}
       </>
