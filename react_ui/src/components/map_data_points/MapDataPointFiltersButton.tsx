@@ -102,6 +102,11 @@ class MapDataPointFiltersButton extends React.Component<
     const FilterItem = ({ label }: { label: string }) => {
       // @ts-ignore
       const filter = filterOptions[label];
+      const translatedLabel = i18n.exists(`tags.${label}`)
+        ? t(`tags.${label}`)
+        : i18n.exists(label)
+        ? t(label)
+        : label;
       const active =
         _.isMatch(filters, filter) ||
         (filter.tags && (filters.tags || []).includes(filter.tags[0]));
@@ -113,7 +118,7 @@ class MapDataPointFiltersButton extends React.Component<
           <span className="float-right small position-relative">
             {counts[label] || ""}
           </span>
-          <span className="mr-4">{label}</span>
+          <span className="mr-4">{translatedLabel}</span>
         </DropdownItem>
       );
     };
@@ -128,9 +133,9 @@ class MapDataPointFiltersButton extends React.Component<
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>{t("Filter")}</DropdownItem>
-          <FilterItem label={t("24h")} />
-          <FilterItem label={t("90 days")} />
-          <FilterItem label={t("My notes")} />
+          <FilterItem label="24h" />
+          <FilterItem label="90 days" />
+          <FilterItem label="My notes" />
           {recentMappers && (
             <div className="dropleft btn-group">
               <button
@@ -149,16 +154,13 @@ class MapDataPointFiltersButton extends React.Component<
             </div>
           )}
           <DropdownItem divider />
-          <FilterItem label={t("New")} />
-          <FilterItem label={t("Processed")} />
+          <FilterItem label="New" />
+          <FilterItem label="Processed" />
           {tags && (
             <>
               <DropdownItem divider />
               {tags.map(({ tag }) => (
-                <FilterItem
-                  label={i18n.exists(`tags.${tag}`) ? t(`tags.${tag}`) : tag}
-                  key={tag}
-                />
+                <FilterItem label={tag} key={tag} />
               ))}
             </>
           )}
