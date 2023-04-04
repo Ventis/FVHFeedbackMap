@@ -1,18 +1,19 @@
 import React from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Button } from "reactstrap";
 
-type PillsSelectionProps = {
+interface PillsSelectionProps extends WithTranslation {
   options: string[];
   selected: string[];
   onClick?: (tag: string) => any;
   color: "primary" | "secondary" | "info" | "dark";
-};
+}
 
-export default class PillsSelection extends React.Component<PillsSelectionProps> {
+class PillsSelection extends React.Component<PillsSelectionProps> {
   static defaultProps = { color: "primary" };
 
   render() {
-    const { options, selected, color } = this.props;
+    const { options, selected, color, t, i18n } = this.props;
     return options.map((tag) => (
       <Button
         size="sm"
@@ -22,7 +23,7 @@ export default class PillsSelection extends React.Component<PillsSelectionProps>
         key={tag}
         onClick={(e: any) => this.onClick(e, tag)}
       >
-        {tag}
+        {i18n.exists(`tags.${tag}`) ? t(`tags.${tag}`) : tag}
       </Button>
     ));
   }
@@ -35,3 +36,5 @@ export default class PillsSelection extends React.Component<PillsSelectionProps>
     return onClick && onClick(tag);
   }
 }
+
+export default withTranslation()(PillsSelection);
