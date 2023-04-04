@@ -82,6 +82,7 @@ class MapDataPointModal extends React.Component<
         : user.username
     } ${formatTimestamp(note.created_at)}`;
 
+    const tag = (note.tags || ["New"])[0];
     const title = (
       <>
         <MapDataPointActionsMenu
@@ -94,9 +95,7 @@ class MapDataPointModal extends React.Component<
           }}
           refreshNote={this.fetchNote}
         />
-        {note.comment || i18n.exists(`tags.${(note.tags || [""])[0]}`)
-          ? t(`tags.${(note.tags || [""])[0]}`)
-          : (note.tags || [""])[0]}
+        {note.comment || i18n.exists(`tags.${tag}`) ? t(`tags.${tag}`) : tag}
         {note.created_by ? t(" by ") : " "}
         {credit}
       </>
