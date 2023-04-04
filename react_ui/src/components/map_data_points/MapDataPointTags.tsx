@@ -18,8 +18,6 @@ const initialState: MapDataPointTagsState = {
   editing: false,
 };
 
-const defaultTags = ["Problem"];
-
 class MapDataPointTags extends React.Component<MapDataPointTagsProps> {
   state = initialState;
 

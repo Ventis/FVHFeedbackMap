@@ -229,9 +229,9 @@ class NewMapDataPoint extends React.Component<
 
   onCancel = () => {
     const status = this.state.status;
-    if (status == "commenting") this.setState({ confirmCancel: true });
+    if (status === "commenting") this.setState({ confirmCancel: true });
     else {
-      if (status == "locating") this.props.cancelLocationRequest();
+      if (status === "locating") this.props.cancelLocationRequest();
       this.setState(resetState);
     }
   };

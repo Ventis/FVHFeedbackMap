@@ -10,7 +10,7 @@ export const userCanEditNote = (
   const is_creator =
     user &&
     mapDataPoint.created_by &&
-    user.id == (mapDataPoint.created_by as CreatedBy).id;
+    user.id === (mapDataPoint.created_by as CreatedBy).id;
   const newAnonymousNote =
     (mapDataPoint.created_at &&
       !user &&
@@ -38,7 +38,7 @@ export const filterNotes = (filters: any, notes: MapDataPoint[]) => {
           if (!(note[key] || []).includes(item)) return false;
         }
       // @ts-ignore
-      else if (note[key] != value) return false;
+      else if (note[key] !== value) return false;
     }
     return true;
   });

@@ -5,11 +5,7 @@ import sessionRequest from "sessionRequest";
 import { mapDataPointCommentsUrl, mapDataPointCommentUrl } from "urls";
 import ErrorAlert from "util_components/bootstrap/ErrorAlert";
 import Icon from "util_components/bootstrap/Icon";
-import {
-  WithTranslation,
-  useTranslation,
-  withTranslation,
-} from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 interface MapDataPointCommentsProps extends WithTranslation {
   mapDataPoint: MapDataPoint;

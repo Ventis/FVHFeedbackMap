@@ -62,7 +62,7 @@ class MapDataPointFiltersButton extends React.Component<
 
   componentDidUpdate(prevProps: Readonly<MapDataPointFiltersButtonProps>) {
     const notes = this.props.mapDataPoints;
-    if (notes && prevProps.mapDataPoints != notes) {
+    if (notes && prevProps.mapDataPoints !== notes) {
       const filters = Object.entries(this.filterOptions());
       const counts = filters.map(([k, v]) => [k, filterNotes(v, notes).length]);
       this.setState({ counts: Object.fromEntries(counts) });
