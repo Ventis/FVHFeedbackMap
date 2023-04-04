@@ -107,7 +107,7 @@ export default class MapDataPointsMap extends React.Component<
 
 export class SimpleMapDataPointsMap extends MapDataPointsMap {
   render() {
-    const { selectLocation, location, zoom } = this.props;
+    const { location, zoom } = this.props;
     if (!location) return <></>;
 
     return (

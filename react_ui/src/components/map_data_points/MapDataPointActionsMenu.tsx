@@ -4,11 +4,7 @@ import { MapDataPoint } from "components/types";
 import MapDataPointReviewActions from "components/map_data_points/MapDataPointReviewActions";
 import sessionRequest from "sessionRequest";
 import { mapDataPointUrl } from "urls";
-import {
-  WithTranslation,
-  useTranslation,
-  withTranslation,
-} from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 interface MapDataPointActionsMenuProps extends WithTranslation {
   note: MapDataPoint;
@@ -34,8 +30,7 @@ class MapDataPointActionsMenu extends React.Component<
   state = initialState;
 
   render() {
-    const { showOnMap, note, adjustPosition, closeNote, canEdit, t } =
-      this.props;
+    const { note, adjustPosition, closeNote, canEdit, t } = this.props;
     const { lon, lat } = note;
 
     const { show } = this.state;

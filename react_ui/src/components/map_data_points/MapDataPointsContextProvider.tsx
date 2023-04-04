@@ -62,13 +62,13 @@ export default class MapDataPointsContextProvider extends React.Component<
       (response) => {
         if (!this.state.mapDataPoints) return;
         const mapDataPoints = this.state.mapDataPoints.slice();
-        const index = mapDataPoints.findIndex((note2) => note2.id == note.id);
+        const index = mapDataPoints.findIndex((note2) => note2.id === note.id);
 
-        if (response.status == 404) {
+        if (response.status === 404) {
           // The note has been rejected
           mapDataPoints.splice(index, 1);
           this.setState({ mapDataPoints });
-        } else if (response.status == 200)
+        } else if (response.status === 200)
           response.json().then((note) => {
             // Align created_by with how it is serialized in the note list response:
             if (note.created_by && typeof note.created_by !== "number")

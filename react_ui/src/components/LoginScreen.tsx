@@ -24,7 +24,7 @@ class LoginScreen extends React.Component<LoginScreenProps, LoginScreenState> {
 
   render() {
     const { onLogin, t } = this.props;
-    const { mode, showTerms } = this.state;
+    const { mode } = this.state;
 
     return (
       <div className="container">
@@ -36,7 +36,7 @@ class LoginScreen extends React.Component<LoginScreenProps, LoginScreenState> {
           />
           <h3>{t("FVH Feedback Map")}</h3>
           <p className="lead">
-            {mode == "login" ? (
+            {mode === "login" ? (
               <>
                 <span className="text-primary">{t("Sign in")}</span> {t("or")}{" "}
                 <button
@@ -59,7 +59,7 @@ class LoginScreen extends React.Component<LoginScreenProps, LoginScreenState> {
             )}
           </p>
         </div>
-        {mode == "login" ? (
+        {mode === "login" ? (
           <LoginForm
             loginUrl={loginUrl}
             onLogin={onLogin}
