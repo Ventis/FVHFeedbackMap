@@ -25,8 +25,8 @@ export default class MapDataPointsContextProvider extends React.Component<
   static contextType = AppContext;
 
   render() {
-    const { children } = this.props;
-    const { user } = this.context;
+    const { children } = this.props as any;
+    const { user } = this.context as any;
 
     const context: MapDataPointsContextType = {
       ...this.state,
