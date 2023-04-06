@@ -1,61 +1,75 @@
-import React from 'react';
+import React from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import PillsSelection from "util_components/PillsSelection";
 import Icon from "util_components/bootstrap/Icon";
 
-type MapDataPointTagsProps = {
-  tags: string[],
-  onChange: (tags: string[]) => any,
-  readOnly?: boolean,
-  expanded?: boolean
+interface MapDataPointTagsProps extends WithTranslation {
+  tags: string[];
+  onChange: (tags: string[]) => any;
+  readOnly?: boolean;
+  expanded?: boolean;
 }
 
 type MapDataPointTagsState = {
-  editing: boolean
-}
-
-const initialState: MapDataPointTagsState = {
-  editing: false
+  editing: boolean;
 };
 
-const defaultTags = ['Problem'];
+const initialState: MapDataPointTagsState = {
+  editing: false,
+};
 
-export default class MapDataPointTags extends React.Component<MapDataPointTagsProps> {
+class MapDataPointTags extends React.Component<MapDataPointTagsProps> {
   state = initialState;
 
   render() {
-    const {tags, readOnly, expanded} = this.props;
-    const {editing} = this.state;
+    const { tags, readOnly, expanded, t } = this.props;
+    const { editing } = this.state;
     const tagOptions = tags;
-    return <div className="list-group-item">
-      <strong>Tags: </strong>
-      {readOnly ?
-        (tags.length > 0) ? <PillsSelection options={tags} selected={tags}/>
-          : 'No tags selected.'
-        :
-        <>
-          {!expanded && <button className="btn btn-light btn-sm rounded-pill float-right"
-                  onClick={() => this.setState({editing: !editing})}>
-            <Icon icon={editing ? 'close' : 'edit'}/>
-          </button>}
-          <PillsSelection options={tagOptions} selected={tags} onClick={this.toggleTag}/>
-        </>
-      }
-    </div>;
+    return (
+      <div className="list-group-item">
+        <strong>{t("Tags")}: </strong>
+        {readOnly ? (
+          tags.length > 0 ? (
+            <PillsSelection options={tags} selected={tags} />
+          ) : (
+            t("No tags selected")
+          )
+        ) : (
+          <>
+            {!expanded && (
+              <button
+                className="btn btn-light btn-sm rounded-pill float-right"
+                onClick={() => this.setState({ editing: !editing })}
+              >
+                <Icon icon={editing ? "close" : "edit"} />
+              </button>
+            )}
+            <PillsSelection
+              options={tagOptions}
+              selected={tags}
+              onClick={this.toggleTag}
+            />
+          </>
+        )}
+      </div>
+    );
   }
 
   componentDidMount() {
-    if (this.props.expanded) this.setState({editing: true})
+    if (this.props.expanded) this.setState({ editing: true });
   }
 
   toggleTag = (tag: string) => {
-    const {editing} = this.state;
+    const { editing } = this.state;
 
-    if (!editing) return this.setState({editing: true});
+    if (!editing) return this.setState({ editing: true });
 
-    const {tags, onChange} = this.props;
+    const { tags, onChange } = this.props;
     const newTags = tags.slice();
     if (tags.includes(tag)) newTags.splice(tags.indexOf(tag), 1);
     else newTags.push(tag);
     onChange(newTags);
-  }
+  };
 }
+
+export default withTranslation()(MapDataPointTags);

@@ -6,8 +6,7 @@ import Geolocator from "util_components/Geolocator";
 import {Location} from "util_components/types";
 import MapDataPointModal from "components/map_data_points/MapDataPointModal";
 import {getTags} from "components/map_data_points/utils";
-
-type TagButtonsProps = {}
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 type TagButtonsState = {
   tags?: Tag[],
@@ -17,7 +16,7 @@ type TagButtonsState = {
 
 const initialState: TagButtonsState = {};
 
-export default class TagButtons extends React.Component<TagButtonsProps, TagButtonsState> {
+class TagButtons extends React.Component<WithTranslation, TagButtonsState> {
   state = initialState;
 
   componentDidMount() {
@@ -25,7 +24,7 @@ export default class TagButtons extends React.Component<TagButtonsProps, TagButt
   }
 
   render() {
-    const {} = this.props;
+    const { t, i18n } = this.props;
     const {tags, dataPoint} = this.state;
     const maxHeight = !tags ? 0 : Math.round(40 / tags.length) + 'vh';
     return !tags ? '' : <div className="container-fluid" style={{height: '100%'}}>
@@ -35,7 +34,7 @@ export default class TagButtons extends React.Component<TagButtonsProps, TagButt
           <div className="col-6 d-flex" key={tag}>
             <button className={`btn btn-${color} mb-3 mt-3 btn-block btn-lg`} onClick={() => this.newPoint(tag)}>
               {icon && <><img src={icon} style={{maxHeight, maxWidth: 480}}/><br/></>}
-              {tag}
+              {i18n.exists(`tags.${tag}`) ? t(`tags.${tag}`) : tag }
             </button>
           </div>)}
       </div>
@@ -52,3 +51,5 @@ export default class TagButtons extends React.Component<TagButtonsProps, TagButt
     .then((dataPoint) => this.setState({dataPoint}))
   }
 }
+
+export default withTranslation()(TagButtons);
