@@ -52,7 +52,7 @@ class Terms extends React.Component<TermsProps, TermsState> {
                 className="btn btn-outline-primary btn-block"
                 onClick={() => this.setState({ showTerms: false })}
               >
-                Close
+                {t("Close")}
               </button>
             </div>
           </Modal>
