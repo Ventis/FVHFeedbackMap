@@ -1,5 +1,4 @@
 import React from "react";
-// @ts-ignore
 import * as L from "leaflet";
 import "mapbox-gl-leaflet";
 import settings from "settings.json";
@@ -144,8 +143,7 @@ export default class Map extends React.Component<MapProps, MapState> {
 
     if (this.bgLayer) this.bgLayer.remove();
 
-    if (background === "osm")
-      // @ts-ignore
+    if (background === "osm") {
       this.bgLayer = L.tileLayer(
         "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
@@ -153,14 +151,14 @@ export default class Map extends React.Component<MapProps, MapState> {
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }
       ).addTo(this.leafletMap);
-    // @ts-ignore
-    else
+    } else {
       this.bgLayer = L.tileLayer
         .wms("https://kartta.hsy.fi/geoserver/ows?", {
           layers: "taustakartat_ja_aluejaot:Ortoilmakuva_2019",
           maxZoom: 19,
         })
         .addTo(this.leafletMap);
+    }
   }
 
   switchBackground = () => {
