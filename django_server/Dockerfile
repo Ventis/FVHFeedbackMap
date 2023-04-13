@@ -8,9 +8,9 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# copy Pipfile
-COPY Pipfile /app/
-COPY Pipfile.lock /app/
+# copy everything
+COPY . /app/
+COPY ./.env.prod /app/.env
 
 # install dependencies
 RUN apt-get update; apt-get install -y netcat

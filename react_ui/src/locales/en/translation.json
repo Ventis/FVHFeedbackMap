@@ -25,12 +25,12 @@
     "Heikko valaistus": "Low lighting",
     "Miellyttävä paikka": "Pleasant area",
     "Vehreää": "Greenery",
-    "Sitting comfort": "Sitting comfort",
-    "Green": "Greenery",
     "Toilet": "Toilet",
-    "Heatstress": "Heatstress",
+    "Sitting comfort": "Sitting comfort",
     "Drinking water": "Drinking water",
-    "Comfortable place": "Comfortable place"
+    "Heatstress": "Heatstress",
+    "Greenery": "Greenery",
+    "Nice place": "Nice place"
   },
   "Password successfully reset.": "Password successfully reset.",
   "Go to login": "Go to login",

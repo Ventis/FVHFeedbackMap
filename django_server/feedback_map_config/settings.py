@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "(*z-ann&51^6l361#ymu0y9tbdk=_g*=3cy8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "urbanage.fvh.io"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "feedback-admin.dev.urbanage.odt.imec-apt.be", "feedback.dev.urbanage.odt.imec-apt.be"]
 
 # Application definition
 
@@ -185,7 +185,7 @@ if LOG_DB_QUERIES:
         },
     }
 
-FRONTEND_ROOT = "https://urbanage.fvh.io/"
+FRONTEND_ROOT = "feedback.dev.urbanage.odt.imec-apt.be"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
