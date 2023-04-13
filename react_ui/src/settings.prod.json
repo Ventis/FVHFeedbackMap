@@ -1,8 +1,8 @@
 {
-  "serverRoot": "https://urbanage.fvh.io",
+  "serverRoot": "https://feedback-admin.dev.urbanage.odt.imec-apt.be",
   "MapBox": {
     "accessToken": "pk.eyJ1Ijoiam9oYW4tZnZoIiwiYSI6ImNrNDJtOGh5cDAxczIzb3FpdHg1Z3c5MGwifQ.bp9ubCm67HLIorEUb21K3A"
   },
   "sentryDsn": "https://6c0f2c98c8b24701ba9fa0b119f2f7c2@o1161048.ingest.sentry.io/6722947",
-  "defaultLocation": [60.17012, 24.94290]
+  "defaultLocation": [51.05585, 3.722891]
 }
