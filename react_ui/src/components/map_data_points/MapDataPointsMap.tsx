@@ -51,7 +51,7 @@ export default class MapDataPointsMap extends React.Component<
           location={location}
           zoom={zoom}
           useUrl={useUrl !== false}
-          extraLayers={_.filter([this.getMapLayer()])}
+          extraLayers={_.filter([this.getMapLayer(), this.getGCMLayer()])}
         />
       </>
     );
@@ -103,6 +103,20 @@ export default class MapDataPointsMap extends React.Component<
       });
     return this.mapLayer;
   }
+
+  getGCMLayer() {
+    const gcmLayer = L.tileLayer.wms(
+      "https://geo.dev.ecosystem-urbanage.eu/geoserver/GCI/wms?CQL_FILTER=simulationid+=+%27baseline%27",
+      {
+        layers: "GCI:gcm_scores_geom",
+        format: "image/png",
+        transparent: true,
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.imec.be">imec</a>',
+      }
+    );
+    return gcmLayer;
+  }
 }
 
 export class SimpleMapDataPointsMap extends MapDataPointsMap {
@@ -113,7 +127,7 @@ export class SimpleMapDataPointsMap extends MapDataPointsMap {
     return (
       <Map
         latLng={[location.lat, location.lon]}
-        extraLayers={[this.getMapLayer()]}
+        extraLayers={[this.getMapLayer(), this.getGCMLayer()]}
         zoom={zoom}
       />
     );
