@@ -79,9 +79,7 @@ class MapDataPointModal extends React.Component<
     const credit = `${
       note.created_by && (note.created_by as CreatedBy).username
         ? (note.created_by as CreatedBy).username
-        : user
-        ? user.username
-        : ""
+        : user?.username || ""
     } ${formatTimestamp(note.created_at)}`;
 
     const tag = (note.tags || ["New"])[0];
