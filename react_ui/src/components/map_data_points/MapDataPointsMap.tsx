@@ -5,6 +5,7 @@ import * as L from "leaflet";
 import MyPositionMap from "util_components/MyPositionMap";
 import Map from "util_components/Map";
 import { Location } from "util_components/types";
+import settings from "../../settings.json";
 
 import { MapDataPointsContext, MapDataPoint } from "components/types";
 import { LatLngLiteral } from "leaflet";
@@ -51,7 +52,7 @@ export default class MapDataPointsMap extends React.Component<
           location={location}
           zoom={zoom}
           useUrl={useUrl !== false}
-          extraLayers={_.filter([this.getMapLayer()])}
+          extraLayers={_.filter([this.getMapLayer(), this.getGCMLayer()])}
         />
       </>
     );
@@ -103,6 +104,19 @@ export default class MapDataPointsMap extends React.Component<
       });
     return this.mapLayer;
   }
+
+  getGCMLayer() {
+    if (settings.gcmWMS) {
+      const gcmLayer = L.tileLayer.wms(settings.gcmWMS, {
+        layers: "GCI:gcm_scores_geom",
+        format: "image/png",
+        transparent: true,
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.imec.be">imec</a>',
+      });
+      return gcmLayer;
+    }
+  }
 }
 
 export class SimpleMapDataPointsMap extends MapDataPointsMap {
@@ -113,7 +127,7 @@ export class SimpleMapDataPointsMap extends MapDataPointsMap {
     return (
       <Map
         latLng={[location.lat, location.lon]}
-        extraLayers={[this.getMapLayer()]}
+        extraLayers={[this.getMapLayer(), this.getGCMLayer()]}
         zoom={zoom}
       />
     );
