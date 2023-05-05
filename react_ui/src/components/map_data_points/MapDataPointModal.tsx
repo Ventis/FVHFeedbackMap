@@ -162,7 +162,7 @@ class MapDataPointModal extends React.Component<
           onChange={(tags) => this.updateSelectedNote({ tags })}
         />
 
-        {settings.enableVotes && (
+        {settings.enableVotes && user != undefined && (
           <MapDataPointVotes
             mapDataPoint={note}
             currentUser={user}
