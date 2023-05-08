@@ -66,12 +66,12 @@ class ButtonPositionField(serializers.Field):
 
 
 class MapDataPointSerializer(BaseMapDataPointSerializer):
-    # upvotes = serializers.SlugRelatedField(many=True, read_only=True, slug_field='user_id')
-    # downvotes = serializers.SlugRelatedField(many=True, read_only=True, slug_field='user_id')
+    upvotes = serializers.SlugRelatedField(many=True, read_only=True, slug_field='user_id')
+    downvotes = serializers.SlugRelatedField(many=True, read_only=True, slug_field='user_id')
     comments = MapDataPointCommentSerializer(many=True, read_only=True)
     button_position = ButtonPositionField(source='*', required=False)
 
     class Meta:
         model = models.MapDataPoint
         fields = ['id', 'comment', 'image', 'lat', 'lon', 'created_at', 'button_position',
-                  'is_processed', 'tags', 'created_by', 'comments', 'device_id']  #, 'upvotes', 'downvotes']
+                  'is_processed', 'tags', 'created_by', 'comments', 'device_id', 'upvotes', 'downvotes']
