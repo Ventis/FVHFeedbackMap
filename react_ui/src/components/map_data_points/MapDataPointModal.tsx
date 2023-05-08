@@ -18,6 +18,8 @@ import MapToolButton from "components/map_data_points/MapToolButton";
 import MapDataPointActionsMenu from "components/map_data_points/MapDataPointActionsMenu";
 import MapDataPointsMap from "components/map_data_points/MapDataPointsMap";
 import { WithTranslation, withTranslation } from "react-i18next";
+import MapDataPointVotes from "./MapDataPointVotes";
+import settings from "../../settings.json";
 
 interface MapDataPointModalProps extends WithTranslation {
   note: MapDataPoint;
@@ -79,9 +81,7 @@ class MapDataPointModal extends React.Component<
     const credit = `${
       note.created_by && (note.created_by as CreatedBy).username
         ? (note.created_by as CreatedBy).username
-        : user
-        ? user.username
-        : ""
+        : user?.username || ""
     } ${formatTimestamp(note.created_at)}`;
 
     const tag = (note.tags || ["New"])[0];
@@ -161,6 +161,14 @@ class MapDataPointModal extends React.Component<
           {...{ tags, readOnly }}
           onChange={(tags) => this.updateSelectedNote({ tags })}
         />
+
+        {settings.enableVotes && user != undefined && (
+          <MapDataPointVotes
+            mapDataPoint={note}
+            currentUser={user}
+            onUpdate={(note) => this.setState({ note })}
+          />
+        )}
 
         <MapDataPointComments
           mapDataPoint={note}

@@ -5,6 +5,7 @@ import * as L from "leaflet";
 import MyPositionMap from "util_components/MyPositionMap";
 import Map from "util_components/Map";
 import { Location } from "util_components/types";
+import settings from "../../settings.json";
 
 import { MapDataPointsContext, MapDataPoint } from "components/types";
 import { LatLngLiteral } from "leaflet";
@@ -105,17 +106,16 @@ export default class MapDataPointsMap extends React.Component<
   }
 
   getGCMLayer() {
-    const gcmLayer = L.tileLayer.wms(
-      "https://geo.dev.ecosystem-urbanage.eu/geoserver/GCI/wms?CQL_FILTER=simulationid+=+%27baseline%27",
-      {
+    if (settings.gcmWMS) {
+      const gcmLayer = L.tileLayer.wms(settings.gcmWMS, {
         layers: "GCI:gcm_scores_geom",
         format: "image/png",
         transparent: true,
         maxZoom: 18,
         attribution: '&copy; <a href="https://www.imec.be">imec</a>',
-      }
-    );
-    return gcmLayer;
+      });
+      return gcmLayer;
+    }
   }
 }
 
