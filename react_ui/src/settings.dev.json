@@ -5,5 +5,6 @@
   },
   "useMockGeolocation": [24.944368, 60.161687],
   "defaultLocation": [60.17012, 24.9429],
+  "enableVotes": true,
   "gcmWMS": "https://geo.dev.ecosystem-urbanage.eu/geoserver/GCI/wms?CQL_FILTER=simulationid+=+%27baseline%27"
 }
